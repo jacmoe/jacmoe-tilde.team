@@ -16,8 +16,11 @@
       |___/                                    |_|                    
 ```
 
+## 2023-03-17 13:41:10 CET
+Busy getting my bearings in this entirely new universe. Very exciting! And really digging that everything is pure, unadulterated text! 😁
+
 ## 2023-03-14 21:00:10 UTC
 Launching jacmoe.pollux.casa capsule !
 
 
-=> ../index.gmi [..]
+=> ../index.gmi Capsule index

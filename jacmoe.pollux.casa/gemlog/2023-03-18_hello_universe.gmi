@@ -1,0 +1,19 @@
+# 2023-03-18 - Hello, Universe!
+```Snoopy sitting in front of a typewriter, writing "It was a dark and stormy night...."
+  ,-~~-.___.
+ / |  '     \         It was a dark and stormy night....
+(  )         0              
+ \_/-, ,----'            
+    ====           //                     
+   /  \-'~;    /~~~(O)
+  /  __/~|   /       |     
+=(  _____| (_________|   W<
+
+```
+
+
+
+=> index.gmi Gemlog index
+=> ../ Capsule index
+
+Copyright 2023 Jacob Moena. CC BY-SA 4.0.
