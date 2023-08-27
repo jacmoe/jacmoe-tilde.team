@@ -59,6 +59,14 @@ p.quote:after {
   content: " » ";
   padding-right: 2px;
 }
+.capslink {
+  background-color: #111;
+  color: #66cdaa;
+  padding: 5px;
+}
 </style>
 </head>
 <body>
+<div class="capslink">
+This is a generated HTML mirror of my Gemini capsule at <a href="gemini://tilde.team/~jacmoe/index.gmi">gemini://tilde.team/~jacmoe/index.gmi</a>
+</div>
