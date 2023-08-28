@@ -23,22 +23,35 @@ body {
   max-width: 1024px;
   padding: 20px 20px;
   margin: 20px auto;
+/*
   border-image: linear-gradient(#f6b73c, #4d9f0c) 30;
   border-width: 1px;
   border-style: solid;
+*/
+  background-color: #222;
+  color: #ffffef;
 }
 
+
+/*
 h1, h2, h3 {
    background: -webkit-linear-gradient(#f6b73c, #4d9f0c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+*/
+
+/*
+*/
+
 
 a {
+  color: #0ca;
   text-decoration: none;
 }
 
 a:hover {
+  color: #c0f;
   text-decoration: underline;
 }
 
@@ -48,6 +61,7 @@ a.textlink:before {
 }
 
 .quote {
+  color: #82eefd;
   font-style: italic;
 }
 
@@ -94,15 +108,18 @@ pre {
   margin-left: 23px; 
   margin-right: 23px; 
   padding: 23px; 
+/*
   border-image: linear-gradient(#f6b73c, #4d9f0c) 30;
+*/
   border-width: 3px;
   border-style: solid;
-  color: grey;
+  background-color: #111;
+  color: #66cdaa;
 }
 
 span.inlinecode {
   font-family: code;
   border: 1px solid #000000;
   padding: 1px;
-  color: grey;
+  color: #66cdaa;
 }

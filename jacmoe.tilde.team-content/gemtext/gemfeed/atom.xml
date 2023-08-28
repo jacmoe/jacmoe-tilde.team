@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <updated>2023-08-28T21:54:02+02:00</updated>
+    <updated>2023-08-28T22:38:48+02:00</updated>
     <title>jacmoe.tilde.team feed</title>
     <subtitle>Jacmoes Cyber Soapbox!</subtitle>
     <link href="gemini://jacmoe.tilde.team/gemfeed/atom.xml" rel="self" />
@@ -43,8 +43,7 @@
 <span>Because there is almost no barrier to entry: edit a simple text file, put it up on the host, and it&#39;s live. Can&#39;t be any simpler than that! 😻 ✍</span><br />
 <br />
 <br />
-<a class='textlink' href='index.html'>Gemlog index</a><br />
-<a class='textlink' href='../index.html'>Capsule index</a><br />
+<a class='textlink' href='../index.html'>Back to the main site</a><br />
 <br />
 <span>Copyright 2023 Jacob Moena. CC BY-SA 4.0.</span><br />
             </div>

@@ -23,7 +23,6 @@ I can see myself using my "Gemini platform" to write about creative writing, and
 Because there is almost no barrier to entry: edit a simple text file, put it up on the host, and it's live. Can't be any simpler than that! 😻 ✍
 
 
-=> index.gmi Gemlog index
-=> ../index.gmi Capsule index
+=> ../index.gmi Back to the main site
 
 Copyright 2023 Jacob Moena. CC BY-SA 4.0.
