@@ -31,4 +31,3 @@ I am excited to be a part of the smol internet!
 
 ## Gemlog
 => ./gemfeed/2023-03-17-hello-universe.gmi 2023-03-17 - Hello, Universe!
-=> ../index.gmi Capsule index

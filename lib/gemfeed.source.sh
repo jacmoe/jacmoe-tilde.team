@@ -62,7 +62,7 @@ GEMFEED
 
     git::add gemtext "$gemfeed_dir/index.gmi"
 
-    cat "$GEMINI_FOOTER" >> "$gemfeed_dir/index.gmi"
-
     gemfeed::updatemainindex
+
+    cat "$GEMINI_FOOTER" >> "$gemfeed_dir/index.gmi"
 }
