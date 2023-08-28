@@ -1,8 +1,5 @@
-# jacmoe.tilde.team's Gemfeed
+# Gemfeed of jacmoe.tilde.team
 
-## Jacmoes Cyber Soapbox
+## Jacmoes Cyber Soapbox!
 
-=> ./2023-03-17-hello-universe.gmi 2023-03-17 (0196 words) - Hello, Universe!
-
-
-=> ../index.gmi Capsule index
+=> ./2023-03-17-hello-universe.gmi 2023-03-17 - Hello, Universe!
