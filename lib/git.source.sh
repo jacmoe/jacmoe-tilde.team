@@ -1,50 +1,57 @@
-# Add a static content file to git
-git::add () {
-    if [[ "$USE_GIT" != yes ]]; then
-        return
-    fi
-
-    local -r content_dir="$CONTENT_BASE_DIR/$1"; shift
-    local file="$1"; shift
-    file=${file/$content_dir/.\/}
-
-    cd "$content_dir" &>/dev/null
-    git add "$file"
-    cd - &>/dev/null
+git::_content_dirs_in_git () {
+    find "$CONTENT_BASE_DIR" -maxdepth 1 -mindepth 1 -type d |
+    while read -r content_dir; do
+        if [ -d "$content_dir/.git" ]; then
+            echo "$content_dir"
+        fi
+    done
 }
 
-# Remove a static content file from git
-git::rm () {
-    if [[ "$USE_GIT" != yes ]]; then
-        return
+git::add_all () {
+    local message="$1"; shift
+    if [ -z "$message" ]; then
+        message='Update content'
     fi
 
-    local -r content_dir="$CONTENT_BASE_DIR/$1"; shift
-    local file="$1"; shift
-    file=${file/$content_dir/.\/}
-
-    cd "$content_dir" &>/dev/null
-    git rm "$file"
-    cd - &>/dev/null
+    git::_content_dirs_in_git | while read -r content_dir; do
+        log INFO "Adding content from $content_dir to git"
+        git::_add_all "$message" "$content_dir"
+    done
 }
 
-# Commit all changes
-git::commit () {
-    if [[ "$USE_GIT" != yes ]]; then
-        return
-    fi
-
-    local -r content_dir="$CONTENT_BASE_DIR/$1"; shift
+git::_add_all () {
     local -r message="$1"; shift
+    local -r content_dir="$1"; shift
+    local -r pwd="$(pwd)"
+    cd "$content_dir" || log PANIC "Unable to chdir to $content_dir"
 
-    cd "$content_dir" &>/dev/null
-    set +e
-    git commit -a -m "$message"
-    if [[ "$GIT_PUSH" == yes ]]; then
-        log INFO "Invoking git pull/push in $content_dir"
-        git pull
-        git push
+    find . -type f -not -path '*/\.git*' | while read -r file; do
+        git add "$file"
+    done
+
+    local -r format="$(basename "$content_dir")"
+    if ! git commit -a -m "$message for $format"; then
+        log INFO 'Nothing new to be added'
     fi
-    set -e
-    cd - &>/dev/null
+
+    cd "$pwd"
 }
+
+git::sync_all () {
+    git::_content_dirs_in_git | while read -r content_dir; do
+        log INFO "Synchronizing content from $content_dir with remote git"
+        git::_sync_all "$content_dir"
+    done
+}
+
+git::_sync_all () {
+    local -r content_dir="$1"; shift
+    cd "$content_dir" || log PANIC "Unable to chdir to $content_dir"
+
+    git pull
+    git push
+    git status
+
+    cd -
+}
+

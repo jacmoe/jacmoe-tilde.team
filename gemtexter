@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 #
 # The Gemtexter blog engine and static site generator
-# by Paul Buetow 2021
+# by Paul Buetow 2021, 2022, 2023
 
 declare -r ARG="$1"; shift
-declare -r VERSION=1.1
-declare -r VERSION_DESCR=prerelease
+declare CONTENT_FILTER="$1"; shift
+declare -r VERSION=2.1.0
+declare -r VERSION_DESCR='release'
+declare -r GEMTEXTER="Gemtexter $VERSION-$VERSION_DESCR"
+declare -r DATE_FORMAT='--iso-8601=seconds'
 declare DATE=date
 declare SED=sed
 declare GREP=grep
+declare XMLLINT=''
+declare SOURCE_HIGHLIGHT=''
 which gdate &>/dev/null && DATE=gdate
 which gsed &>/dev/null && SED=gsed
 which ggrep &>/dev/null && GREP=ggrep
@@ -16,7 +21,17 @@ readonly DATE
 readonly SED
 readonly GREP
 
-set -e
+# Set unset variables to make 'set -u' work, they can optionally be passed as
+# enviroments to Gemtexter
+test -z "$CONFIG_FILE_PATH" && CONFIG_FILE_PATH=''
+test -z "$GIT_COMMIT_MESSAGE" && GIT_COMMIT_MESSAGE=''
+test -z "$LOG_VERBOSE" && LOG_VERBOSE=''
+test -z "$PRE_GENERATE_HOOK" && PRE_GENERATE_HOOK=''
+test -z "$POST_PUBLISH_HOOK" && POST_PUBLISH_HOOK=''
+test -z "$HTML_VARIANT" && HTML_VARIANT=''
+test -z "$MASTODON_URI" && MASTODON_URI=''
+
+set -euf -o pipefail
 
 if [[ -n "$CONFIG_FILE_PATH" ]]; then
     source "$CONFIG_FILE_PATH"
@@ -26,28 +41,69 @@ else
     source ./gemtexter.conf
 fi
 
+if [[ -z "$HTML_VARIANT" ]]; then
+    export HTML_VARIANT_TO_USE=default
+else
+    export HTML_VARIANT_TO_USE="$HTML_VARIANT"
+fi
+
 source ./lib/assert.source.sh
-source ./lib/git.source.sh
 source ./lib/atomfeed.source.sh
 source ./lib/gemfeed.source.sh
 source ./lib/generate.source.sh
+source ./lib/git.source.sh
 source ./lib/html.source.sh
 source ./lib/log.source.sh
 source ./lib/md.source.sh
+source ./lib/notes.source.sh
+source ./lib/template.source.sh
 
 help () {
     cat <<HELPHERE
 $0's possible arguments:
-    --feed      Generates Gemtext Atom feed and Gemfeed.
-    --generate  Generates all known output formats (html, md, ...).
-                If USE_GIT=yes set, all files will be commited to git too.
-                If GIT_PUSH=yes is set, all content will be pushed to origin.
+    --generate  Generates all known output formats (feeds, html, md, ...).
     --test      Only runs some shellcheck and unit tests.
     --version   Prints out the version of gemtexter
-    --help      Prints this retty text.
+    --feed      Generates only Gemtext Atom feed and Gemfeed.
+    --git-add   Add all files to Git
+    --git-sync  Sync all files with the remote origin
+    --git       Both of above
+    --publish   Runs --generate, --git-add and --git-sync
+    --help      Prints this pretty text.
 Example:
-    USE_GIT=yes GIT_PUSH=yes $0 --generate
+    $0 --generate
 HELPHERE
+}
+
+# Make sure that there are the correct versions of the dependencies installed.
+check_dependencies () {
+    # At least, Bash 5 is required
+    local -i required_version=5
+    IFS=. read -ra version <<< "$BASH_VERSION"
+    if [ "${version[0]}" -lt $required_version ]; then
+        log ERROR "ERROR, \"bash\" must be at least at major version $required_version!"
+        exit 2
+    fi
+
+    # These must be the GNU versions of the commands
+    for tool in $DATE $SED $GREP; do
+        if ! $tool --version | grep -q GNU; then
+            log ERROR "ERROR, \"$tool\" command is not the GNU version, please install!"
+            exit 2
+        fi
+    done
+
+    if ! xmllint --version &>/dev/null; then
+        log WARN "WARN, \"xmllint\" command is not installed, but it's recommended!"
+    else
+        export XMLLINT=xmllint
+    fi
+
+    if ! source-highlight --version &>/dev/null; then
+        log WARN "WARN, GNU \"source-highlight\" command is not installed, but it's recommended!"
+    else
+        export SOURCE_HIGHLIGHT=source-highlight
+    fi
 }
 
 setup () {
@@ -56,8 +112,8 @@ setup () {
 The content base directory, does not exist. Run the following to create it, it
 also adds some sample Gemtext content:
 
-    mkdir -p $CONTENT_BASE_DIR/{meta,md,html}
-    git clone --branch content-gemtext https://github.com/snonux/buetow.org $CONTENT_BASE_DIR/gemtext
+    mkdir -p $CONTENT_BASE_DIR/{md,html}
+    git clone --branch content-gemtext https://codeberg.org/snonux/foo.zone $CONTENT_BASE_DIR/gemtext
     rm -Rf $CONTENT_BASE_DIR/gemtext/.git
 
 Once done, you are ready to edit the files in $CONTENT_BASE_DIR/gemtext. Every
@@ -67,43 +123,65 @@ again.
 
 For a list of other available arguments run
     $0 --help
-
-Pro tip: You could make all the directories in $CONTENT_BASE_DIR separate git
-repositories or branches. You can then run
-    USE_GIT=yes $0 --generate
-so that all static files are commited to the content repositories too. 
 END
         exit 1
     fi
 }
 
 main () {
-    local -r arg="$1"; shift
-
+    check_dependencies
     setup
 
-    case $arg in
+    case $ARG in
         --test)
             LOG_VERBOSE=yes
             assert::shellcheck
+            template::test
             html::test
             md::test
             ;;
         --feed)
-            html::test
-            md::test
             gemfeed::generate
             atomfeed::generate
             ;;
         --generate)
-            html::test
-            md::test
-            gemfeed::generate
-            atomfeed::generate
+            if [ -x "$PRE_GENERATE_HOOK" ]; then
+                $PRE_GENERATE_HOOK
+            fi
+            template::generate
+            log INFO 'Generating feeds - this may will take a while'
+            gemfeed::generate &
+            atomfeed::generate &
+            notes::generate &
+            wait
             generate::fromgmi html md
+            ;;
+        --template)
+            template::generate
+            ;;
+        --git)
+            $0 --git-add
+            $0 --git-sync
+            ;;
+        --git-add)
+            git::add_all "$GIT_COMMIT_MESSAGE"
+            ;;
+        --git-sync)
+            git::sync_all
             ;;
         --version)
             echo "This is gemtexter version $VERSION $VERSION_DESCR"
+            ;;
+        --draft)
+            template::draft
+            generate::draft html md
+            ;;
+        --publish)
+            $0 --generate
+            $0 --git
+            if [ -x "$POST_PUBLISH_HOOK" ]; then
+                $POST_PUBLISH_HOOK
+            fi
             ;;
         --help|*)
             help
@@ -113,5 +191,5 @@ main () {
     return 0
 }
 
-main "$ARG"
+main
 exit $?
