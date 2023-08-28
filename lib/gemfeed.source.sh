@@ -58,6 +58,8 @@ GEMFEED
             "$gemfeed_dir/index.gmi.tmp"
     done < <(gemfeed::get_posts)
 
+    cat "$GEMINI_FOOTER" >> "$gemfeed_dir/index.gmi.tmp"
+
     mv "$gemfeed_dir/index.gmi.tmp" "$gemfeed_dir/index.gmi"
     git::add gemtext "$gemfeed_dir/index.gmi"
 
