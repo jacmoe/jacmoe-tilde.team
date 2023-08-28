@@ -1,5 +1,3 @@
-#  ~jacmoe
-=> ../ Back to tilde.team
 ```Jacmoes Cyber Soapbox logo
       ██                                                       
      ░██                                                       
