@@ -1,0 +1,32 @@
+#  Tinylog of jacmoe
+```
+      ██                                                       
+     ░██                                                       
+     ░██  ██████    █████  ██████████   ██████   █████   ██████
+     ░██ ░░░░░░██  ██░░░██░░██░░██░░██ ██░░░░██ ██░░░██ ██░░░░ 
+     ░██  ███████ ░██  ░░  ░██ ░██ ░██░██   ░██░███████░░█████ 
+ ██  ░██ ██░░░░██ ░██   ██ ░██ ░██ ░██░██   ░██░██░░░░  ░░░░░██
+░░█████ ░░████████░░█████  ███ ░██ ░██░░██████ ░░██████ ██████ 
+ ░░░░░   ░░░░░░░░  ░░░░░  ░░░  ░░  ░░  ░░░░░░   ░░░░░░ ░░░░░░  
+  ____      _                 ____                    _               
+ / ___|   _| |__   ___ _ __  / ___|  ___   __ _ _ __ | |__   _____  __
+| |  | | | | '_ \ / _ \ '__| \___ \ / _ \ / _` | '_ \| '_ \ / _ \ \/ /
+| |__| |_| | |_) |  __/ |     ___) | (_) | (_| | |_) | |_) | (_) >  < 
+ \____\__, |_.__/ \___|_|    |____/ \___/ \__,_| .__/|_.__/ \___/_/\_\
+      |___/                                    |_|                    
+```
+
+## 2023-08-29 09:25:10 CEST
+I have now moved my site to tilde.team. And am now generating the HTML mirror using Gemtexter. Looking forward to be spending time with the community at tilde.team!
+
+## 2023-03-18 09:25:10 CET
+At the web I constantly have the feeling of posting into the void. Here, in the Smolnet, I know that I am. Should anyone happen to stumble upon this tinylog, it is going to be an unexpected bonus. And that is a consolation, and quite a bit liberating, I think!
+
+## 2023-03-17 13:41:10 CET
+Busy getting my bearings in this entirely new universe. Very exciting! And really digging that everything is pure, unadulterated text! 😁
+
+## 2023-03-14 21:00:10 UTC
+Launching jacmoe.pollux.casa capsule !
+
+
+=> index.gmi Back to main site

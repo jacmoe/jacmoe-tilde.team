@@ -13,9 +13,11 @@
 Copyright 2023 Jacob Moena. CC BY-SA 4.0.
 ```
 
-## Welcome To Jacmoe's Cyber Soapbox
+# Jacmoe's Cyber Soapbox
 > Increasingly Interesting ...
 
+
+## Welcome
 Here you will find an eclectic mix of writing, philosophy, humor, programming, Linux living, and culture. I am a very autistic Danish-Norwegian creative writer - 🇳🇴🇩🇰
 
 I have too many projects; too much time.
@@ -26,5 +28,25 @@ I will also evangelize Emacs , promote the Zig programming language, share my in
 
 I am excited to be a part of the smol internet!
 
-## Gemlog
+## Log
+
+### Tinylog
+Last three entries in my Tinylog:
+
+## 2023-08-29 09:25:10 CEST
+I have now moved my site to tilde.team. And am now generating the HTML mirror using Gemtexter. Looking forward to be spending time with the community at tilde.team!
+
+## 2023-03-18 09:25:10 CET
+At the web I constantly have the feeling of posting into the void. Here, in the Smolnet, I know that I am. Should anyone happen to stumble upon this tinylog, it is going to be an unexpected bonus. And that is a consolation, and quite a bit liberating, I think!
+
+## 2023-03-17 13:41:10 CET
+Busy getting my bearings in this entirely new universe. Very exciting! And really digging that everything is pure, unadulterated text! 😁
+
+=> tinylog.gmi Tinylog archive
+
+### Stay updated
+=> ./gemfeed/atom.xml Subscribe to this blog's Atom feed
+=> ./gemfeed/index.gmi Subscribe to this blog's Gemfeed
+
+### Gemlog
 => ./gemfeed/2023-03-17-hello-universe.gmi 2023-03-17 - Hello, Universe!
