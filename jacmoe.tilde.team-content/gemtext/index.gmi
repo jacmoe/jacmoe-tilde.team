@@ -31,7 +31,7 @@ I am excited to be a part of the smol internet!
 ## Tinylog
 Last three entries in my Tinylog:
 
-### 2023-08-29 09:25:10 CEST
+### 2023-08-29 19:37:10 CEST
 I have now moved my site to tilde.team. And am now generating the HTML mirror using Gemtexter. Looking forward to be spending time with the community at tilde.team!
 
 ### 2023-03-18 09:25:10 CET
