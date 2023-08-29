@@ -1,0 +1,6 @@
+#+title: jacmoe-tilde.team
+This is the source from which my Gemini pod, and its HTML mirror, is generated.
+
+My Gemini pod is hosted by [[https://tilde.team/][tilde.team]], and can be reached by [[gemini://tilde.team/~jacmoe/][gemini://tilde.team/~jacmoe/]], or by its HTML mirror: https://jacmoe.tilde.team/.
+
+This is powered by the excellent [[https://codeberg.org/snonux/gemtexter][Gemtexter]] blog engine and static site generator.
