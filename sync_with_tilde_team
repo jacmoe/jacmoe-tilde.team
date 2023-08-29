@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+rsync -azP ./jacmoe.tilde.team-content/gemtext/ jacmoe@tilde.team:public_gemini
+rsync -azP ./jacmoe.tilde.team-content/html/ jacmoe@tilde.team:public_html
