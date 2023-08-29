@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <updated>2023-08-28T23:43:35+02:00</updated>
-    <title>jacmoe.tilde.team feed</title>
+    <updated>2023-08-29T19:00:32+02:00</updated>
+    <title>tilde.team/~jacmoe feed</title>
     <subtitle>Jacmoes Cyber Soapbox!</subtitle>
-    <link href="https://jacmoe.tilde.team/gemfeed/atom.xml" rel="self" />
-    <link href="https://jacmoe.tilde.team/" />
-    <id>https://jacmoe.tilde.team/</id>
+    <link href="https://tilde.team/~jacmoe/gemfeed/atom.xml" rel="self" />
+    <link href="https://tilde.team/~jacmoe/" />
+    <id>https://tilde.team/~jacmoe/</id>
     <entry>
         <title>Hello, Universe!</title>
-        <link href="https://jacmoe.tilde.team/gemfeed/2023-03-17-hello-universe.html" />
-        <id>https://jacmoe.tilde.team/gemfeed/2023-03-17-hello-universe.html</id>
+        <link href="https://tilde.team/~jacmoe/gemfeed/2023-03-17-hello-universe.html" />
+        <id>https://tilde.team/~jacmoe/gemfeed/2023-03-17-hello-universe.html</id>
         <updated>2023-03-17T00:38:19+02:00</updated>
         <author>
             <name>Jacob Moena</name>
